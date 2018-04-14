@@ -4,3 +4,16 @@
 .text-center-align{
   text-align: center;
 }
+.has-error{
+  color:red;
+}
+.my-container{
+  padding:30px;
+}
+.contact-info-btn{
+  margin-left:35%;
+  margin-top:20px;
+}
+.contact-btn{
+  margin-top:20px;
+}
