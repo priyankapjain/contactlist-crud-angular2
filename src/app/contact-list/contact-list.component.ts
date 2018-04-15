@@ -91,6 +91,9 @@ export class ContactListComponent implements OnInit {
   resetForm() {
     this.contactListForm.reset();
     this.titleMsg = 'Add Contact Details';
+    if(this.currentIndex!==null){
+      this.currentIndex = null;
+    }
   }
 
   resetDataSavedStatus() {
