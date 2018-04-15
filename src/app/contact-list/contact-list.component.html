@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="panel panel-primary width_set">
-      <div class="panel-heading text-center-align"> Add contact Details</div>
+      <div class="panel-heading text-center-align"> {{titleMsg}}</div>
       <div class="panel-body">
         <div class="row" *ngIf="this.savedStatus.length>0">
           <span class="saved-status"> {{savedStatus}}</span>
@@ -135,7 +135,7 @@
             <td>{{item.email}}</td>
             <td>{{item.status}}</td>
             <td (click)="editData(item,i)"><span class="glyphicon glyphicon-pencil data-edit">Edit</span></td>
-            <td (click)="deleteData(item,i)"><span class="glyphicon glyphicon-trash has-error"></span></td>
+            <td (click)="deleteData(i)"><span class="glyphicon glyphicon-trash has-error"></span></td>
           </tr>
           </tbody>
         </table>
