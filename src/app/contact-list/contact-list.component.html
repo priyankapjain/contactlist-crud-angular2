@@ -1,68 +1,148 @@
 <div class="container-fluid my-container">
   <div class="row">
-    <h4 class="header-menu"> Contact List App</h4>
+    <h4 class="header-menu header-text"> Contact List App</h4>
   </div>
   <div class="row">
-    <div class="panel panel-primary">
+    <div class="panel panel-primary width_set">
       <div class="panel-heading text-center-align"> Add contact Details</div>
       <div class="panel-body">
+        <div class="row" *ngIf="this.savedStatus.length>0">
+          <span class="saved-status"> {{savedStatus}}</span>
+        </div>
         <form [formGroup]="contactListForm" novalidate
               (ngSubmit)="addContact(contactListForm.value)"
               ngNativeValidate>
-          <div class="form-groupm">
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <label for="firstName">First Name</label>
-              <input type="text" placeholder="First Name" id="firstName" class="form-control"
-                     formControlName="firstName">
-              <span class="has-error"
-                    *ngIf="contactListForm.controls['firstName'].invalid && contactListForm.controls['firstName'].touched">
+          <div class="row width_set">
+            <div class="form-group width_set">
+              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <label for="firstName">First Name</label>
+                <input type="text" placeholder="First Name" id="firstName" class="form-control"
+                       formControlName="firstName">
+                <span class="has-error"
+                      *ngIf="(contactListForm.controls['firstName'].invalid && contactListForm.controls['firstName'].touched) || (formSubmitted && contactListForm.controls['firstName'].invalid )">
                {{validationMessageList.firstName}}
             </span>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-              <label for="lastName">Last Name</label>
-              <input type="text" placeholder="Last Name" id="lastName" class="form-control" formControlName="lastName">
-              <span class="has-error"
-                    *ngIf="contactListForm.controls['lastName'].invalid && contactListForm.controls['lastName'].touched">
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <label for="lastName">Last Name</label>
+                <input type="text" placeholder="Last Name" id="lastName" class="form-control"
+                       formControlName="lastName">
+                <span class="has-error"
+                      *ngIf="(contactListForm.controls['lastName'].invalid && contactListForm.controls['lastName'].touched) || (formSubmitted && contactListForm.controls['lastName'].invalid)">
                {{validationMessageList.lastName}}
             </span>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-              <label for="contact">Contact</label>
-              <input type="text" placeholder="Contact" id="contact" class="form-control" formControlName="contact">
-              <span class="has-error"
-                    *ngIf="contactListForm.controls['contact'].invalid && contactListForm.controls['contact'].touched">
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <label for="contact">Contact</label>
+                <input type="text" placeholder="Contact" id="contact" class="form-control" formControlName="contact">
+                <span class="has-error"
+                      *ngIf="(contactListForm.controls['contact'].invalid && contactListForm.controls['contact'].touched) || (formSubmitted && contactListForm.controls['contact'].invalid)">
                {{validationMessageList.contact}}
             </span>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <label for="email">Email</label>
-              <input type="email" placeholder="Email" id="email" class="form-control" formControlName="email">
-              <span class="has-error"
-                    *ngIf="contactListForm.controls['email'].invalid && contactListForm.controls['email'].touched">
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Email" id="email" class="form-control" formControlName="email">
+                <span class="has-error"
+                      *ngIf="(contactListForm.controls['email'].invalid && contactListForm.controls['email'].touched) || (formSubmitted &&contactListForm.controls['email'].invalid )">
                {{validationMessageList.email}}
             </span>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-              <label for="status">Status</label>
-              <select name="status"
-                      class="form-control"
-                      formControlName="status"
-                      id='status'>
-                <option value="">Select</option>
-                <option *ngFor="let mt of statusValus"
-                        [ngValue]="mt">{{mt}}
-                </option>
-              </select>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <label for="status">Status</label>
+                <select name="status"
+                        class="form-control"
+                        formControlName="status"
+                        id='status'>
+                  <option value="">Select</option>
+                  <option *ngFor="let mt of statusValus"
+                          [ngValue]="mt">{{mt}}
+                  </option>
+                </select>
+                <span class="has-error"
+                      *ngIf="(contactListForm.controls['status'].invalid && contactListForm.controls['status'].touched) || (formSubmitted &&contactListForm.controls['status'].invalid )">
+               {{validationMessageList.status}}
+            </span>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="contact-info-btn">
-              <button class="btn btn-primary contact-btn" type="submit">Add Contact</button>
+              <button *ngIf="!(this.currentIndex!==null)" class="btn btn-primary contact-btn" type="submit">Add
+                Contact
+              </button>
             </div>
           </div>
         </form>
+        <div class="btn-group-reset-item">
+          <button *ngIf="(this.currentIndex!==null)" class="btn btn-primary updateBtn"
+                  (click)="updateData(contactListForm.value)">Update
+          </button>
+          <button class="btn btn-danger resetBtn" (click)="resetForm()">Reset</button>
+        </div>
+
       </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!--Table-->
+<div class="my-container-fortable">
+  <div class="panel panel-primary">
+    <div class="panel-heading  text-center-align">Contact List</div>
+    <div class="panel-body">
+      <div class="table-responsive" *ngIf="contactListData.length>0;else noDataFound">
+        <table class="table fontAdjust">
+          <thead>
+          <tr>
+            <td>-</td>
+            <td>
+              <input type="text" class="form-control" name="firstName" placeholder="firstName"
+                     [(ngModel)]="contactListModel.firstName">
+            </td>
+            <td> <input type="text" class="form-control" name="contact" placeholder="contact"
+                        [(ngModel)]="contactListModel.contact"></td>
+            <td>
+              <input type="text" class="form-control" name="email" placeholder="email"
+                       [(ngModel)]="contactListModel.email">
+            </td>
+
+            <td>
+              <input type="text" class="form-control" name="status" placeholder="status"
+                        [(ngModel)]="contactListModel.status">
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>S NO</td>
+            <td>Full Name</td>
+            <td>Contact</td>
+            <td>Email</td>
+            <td>Status</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of contactListData| searchfilter: 'status':contactListModel.status| searchfilter: 'firstName':contactListModel.firstName| searchfilter: 'email':contactListModel.email| searchfilter: 'contact':contactListModel.contact;let i=index ">
+            <td>{{i+1}}</td>
+            <td>{{item.firstName}}-{{item.lastName}}</td>
+            <td>{{item.contact}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.status}}</td>
+            <td (click)="editData(item,i)"><span class="glyphicon glyphicon-pencil data-edit">Edit</span></td>
+            <td (click)="deleteData(item,i)"><span class="glyphicon glyphicon-trash has-error"></span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noDataFound>
+        <div> No data available yet , Please add contact details</div>
+      </ng-template>
     </div>
   </div>
 </div>

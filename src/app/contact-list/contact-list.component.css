@@ -9,6 +9,7 @@
 }
 .my-container{
   padding:30px;
+  font-size: 14px;
 }
 .contact-info-btn{
   margin-left:35%;
@@ -16,4 +17,32 @@
 }
 .contact-btn{
   margin-top:20px;
+}
+.width_set{
+  width: 100%;
+}
+
+.header-text{
+  padding-left:500px;
+}
+.resetBtn{
+  float: right;
+  margin-right: 687px;
+  margin-top: -25px;
+}
+.my-container-fortable{
+  padding:14px;
+  font-size: 14px;
+}
+.updateBtn{
+  float: right;
+  margin-right: 776px;
+  margin-top: 1px;
+}
+.saved-status{
+  color:green;
+  padding-left:500px;
+}
+.data-edit{
+  color:blue;
 }
