@@ -18,6 +18,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run ` ng test --single-run --code-coverage` to execute the unit tests and it will generate code coverage (istanbhul)
 
+![code_coverage](https://user-images.githubusercontent.com/37510432/38777670-49e83234-40c9-11e8-9867-17b4cd41e9f0.JPG)
+
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
