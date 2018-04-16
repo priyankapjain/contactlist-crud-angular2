@@ -96,6 +96,7 @@ export class ContactListComponent implements OnInit {
     }
   }
 
+
   resetDataSavedStatus() {
     setTimeout(() => {
       this.savedStatus = '';
