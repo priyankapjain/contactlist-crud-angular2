@@ -85,8 +85,8 @@ fdescribe('ContactListComponent', () => {
   });
   it('should filter text for data in table while filtering data',()=>{
     let filterObj  = new SearchFilterPipe();
-    // expect(filterObj.transform(undefined,'contact','90')).toEqual([]);
     expect(filterObj.transform([{contact:'909090'}],'contact',undefined)).toEqual([{contact:'909090'}]);
     expect(filterObj.transform([{contact:'909090'}],'contact','90')).toEqual([{contact:'909090'}]);
-  })
+  });
+  
 });

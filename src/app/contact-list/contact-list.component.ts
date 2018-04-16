@@ -42,14 +42,13 @@ export class ContactListComponent implements OnInit {
       contact: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
       email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
       status: ['', Validators.required]
-    })
+    });
   }
 
-  /* On click of add contact button checking validations and saved data*/
+  /* Check validations on add contact button click and then save data*/
   addContact(data) {
     this.savedStatus = '';
     this.formSubmitted = true;
-    console.log(this.contactListForm.valid);
     if (this.contactListForm.valid) {
       this.contactListData.push(data);
       this.resetForm();
@@ -59,7 +58,7 @@ export class ContactListComponent implements OnInit {
     this.resetDataSavedStatus();
   }
 
-  /* Edit Data*/
+  /* Edit /Update Data*/
   editData(item, index) {
     this.currentIndex = index;
     this.contactListForm.patchValue(item);
@@ -72,7 +71,7 @@ export class ContactListComponent implements OnInit {
       this.contactListData[this.currentIndex] = data;
       this.currentIndex = null;
       this.resetForm();
-      this.savedStatus = 'Data has been saved updated successfully';
+      this.savedStatus = 'Data has been  updated successfully';
       this.titleMsg = 'Add Contact Details';
     }
     this.resetDataSavedStatus();
@@ -82,7 +81,7 @@ export class ContactListComponent implements OnInit {
   deleteData( index) {
     if (index !== -1) {
       this.contactListData.splice(index, 1);
-      this.savedStatus = 'Data has been saved Deleted successfully';
+      this.savedStatus = 'Data has been Deleted successfully';
     }
     this.resetDataSavedStatus();
   }
