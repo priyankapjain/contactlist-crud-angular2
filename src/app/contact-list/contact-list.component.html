@@ -34,9 +34,9 @@
               </div>
               <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                 <label for="contact">Contact</label>
-                <input type="text" placeholder="Contact" id="contact" class="form-control" formControlName="contact">
+                <input type="number" placeholder="Contact" id="contact" class="form-control" formControlName="contact">
                 <span class="has-error"
-                      *ngIf="(contactListForm.controls['contact'].invalid && contactListForm.controls['contact'].touched) || (formSubmitted && contactListForm.controls['contact'].invalid)">
+                      *ngIf="(contactListForm.controls['contact'].invalid && contactListForm.controls['contact'].touched) || (formSubmitted && (contactListForm.controls['contact'].invalid || contactListForm.controls['contact'].value.toString().length!==10 )) || (contactListForm.controls['contact'].touched && contactListForm.controls['contact'].value.toString().length!==10)">
                {{validationMessageList.contact}}
             </span>
               </div>
@@ -103,16 +103,16 @@
               <input type="text" class="form-control" name="firstName" placeholder="firstName"
                      [(ngModel)]="contactListModel.firstName">
             </td>
-            <td> <input type="text" class="form-control" name="contact" placeholder="contact"
-                        [(ngModel)]="contactListModel.contact"></td>
+            <td><input type="text" class="form-control" name="contact" placeholder="contact"
+                       [(ngModel)]="contactListModel.contact"></td>
             <td>
               <input type="text" class="form-control" name="email" placeholder="email"
-                       [(ngModel)]="contactListModel.email">
+                     [(ngModel)]="contactListModel.email">
             </td>
 
             <td>
               <input type="text" class="form-control" name="status" placeholder="status"
-                        [(ngModel)]="contactListModel.status">
+                     [(ngModel)]="contactListModel.status">
             </td>
             <td></td>
             <td></td>
@@ -128,7 +128,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of contactListData| searchfilter: 'status':contactListModel.status| searchfilter: 'firstName':contactListModel.firstName| searchfilter: 'email':contactListModel.email| searchfilter: 'contact':contactListModel.contact;let i=index ">
+          <tr
+            *ngFor="let item of contactListData| searchfilter: 'status':contactListModel.status| searchfilter: 'firstName':contactListModel.firstName| searchfilter: 'email':contactListModel.email| searchfilter: 'contact':contactListModel.contact;let i=index ">
             <td>{{i+1}}</td>
             <td>{{item.firstName}}-{{item.lastName}}</td>
             <td>{{item.contact}}</td>

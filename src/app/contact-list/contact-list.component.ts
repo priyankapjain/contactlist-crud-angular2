@@ -49,7 +49,7 @@ export class ContactListComponent implements OnInit {
   addContact(data) {
     this.savedStatus = '';
     this.formSubmitted = true;
-    if (this.contactListForm.valid) {
+    if (this.contactListForm.valid && this.contactListForm.controls['contact'].value.toString().length === 10) {
       this.contactListData.push(data);
       this.resetForm();
       this.formSubmitted = false;
@@ -67,7 +67,7 @@ export class ContactListComponent implements OnInit {
 
   updateData(data: any) {
     this.savedStatus = '';
-    if (this.contactListForm.valid) {
+    if (this.contactListForm.valid && this.contactListForm.controls['contact'].value.toString().length === 10) {
       this.contactListData[this.currentIndex] = data;
       this.currentIndex = null;
       this.resetForm();
@@ -78,7 +78,7 @@ export class ContactListComponent implements OnInit {
   }
 
   /* Delete Data*/
-  deleteData( index) {
+  deleteData(index) {
     if (index !== -1) {
       this.contactListData.splice(index, 1);
       this.savedStatus = 'Data has been Deleted successfully';
@@ -90,7 +90,7 @@ export class ContactListComponent implements OnInit {
   resetForm() {
     this.contactListForm.reset();
     this.titleMsg = 'Add Contact Details';
-    if(this.currentIndex!==null){
+    if (this.currentIndex !== null) {
       this.currentIndex = null;
     }
   }
@@ -108,5 +108,6 @@ export class ContactListComponent implements OnInit {
     this.contactListModel.status = undefined;
     this.contactListModel.firstName = undefined;
   }
+
 
 }
